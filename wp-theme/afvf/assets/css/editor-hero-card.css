@@ -1,0 +1,571 @@
+/**
+ * Carte hero : même rendu dans l’éditeur que sur le site public.
+ * (L’éditeur Gutenberg force souvent pleine largeur / flex différent.)
+ */
+
+.editor-styles-wrapper .wp-block-cover.afvf-wix-photo-card,
+.editor-styles-wrapper .wp-block-cover.afvf-hero-entreprises {
+  min-height: min(560px, 88vh);
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  /* Même effet « sous le header » que le site public */
+  margin-top: calc(-1 * var(--header-bar-height, 58px));
+  padding-top: var(--header-bar-height, 58px);
+  box-sizing: border-box;
+  overflow: visible !important;
+}
+
+.editor-styles-wrapper .wp-block-cover.afvf-wix-photo-card .wp-block-cover__background {
+  opacity: 0 !important;
+}
+
+.editor-styles-wrapper .wp-block-cover.afvf-wix-photo-card .wp-block-cover__inner-container {
+  width: 100% !important;
+  min-height: min(480px, 70vh);
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.editor-styles-wrapper .wp-block-cover.afvf-wix-photo-card .wp-block-group.afvf-wix-overlay-card,
+.editor-styles-wrapper .wp-block-cover .afvf-wix-overlay-card,
+.editor-styles-wrapper .afvf-wix-overlay-card.wp-block-group.has-background {
+  --afvf-hero-card-width: 920px;
+  background: #fff !important;
+  color: #333;
+  /* Pas de width !important : laisser Mise en page / Dimensions modifier la carte */
+  width: min(var(--wp--style--global--content-size, var(--afvf-hero-card-width)), 100%);
+  max-width: 100%;
+  flex: 0 1 auto !important;
+  align-self: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box;
+  outline: 2px dashed rgba(236, 94, 135, 0.55);
+  outline-offset: -2px;
+}
+
+.editor-styles-wrapper .afvf-wix-overlay-card .wp-block-group__inner-container,
+.editor-styles-wrapper .afvf-wix-overlay-card.is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)) {
+  max-width: none !important;
+  width: 100% !important;
+  margin-inline: 0 !important;
+}
+
+.editor-styles-wrapper .afvf-wix-overlay-card.is-style-afvf-hero-card-narrow {
+  --afvf-hero-card-width: 640px;
+}
+
+.editor-styles-wrapper .afvf-wix-overlay-card.is-style-afvf-hero-card-wide {
+  --afvf-hero-card-width: 1100px;
+}
+
+.editor-styles-wrapper .afvf-wix-overlay-card.is-style-afvf-hero-card-custom {
+  --afvf-hero-card-width: 720px;
+}
+
+.editor-styles-wrapper .afvf-local-offset__stage {
+  position: relative;
+  max-width: 980px;
+  margin: 0 auto;
+}
+.editor-styles-wrapper .afvf-local-offset__photo {
+  width: min(640px, 86%) !important;
+  max-width: none !important;
+}
+.editor-styles-wrapper .afvf-local-offset__card {
+  width: min(380px, 88%) !important;
+  max-width: 380px !important;
+  margin: clamp(-5.5rem, -16vw, -7rem) 0 0 auto !important;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.14);
+  outline: 2px dashed rgba(31, 79, 163, 0.35);
+  outline-offset: -2px;
+}
+
+.editor-styles-wrapper .wp-block-cover.afvf-adhere-banner,
+.editor-styles-wrapper .wp-block-cover.afvf-adhere-cover {
+  overflow: visible !important;
+  /* Valeur par défaut seulement ; le réglage Couverture → Hauteur min. prime (style inline). */
+  min-height: min(640px, 68vh);
+  display: grid !important;
+}
+.editor-styles-wrapper .wp-block-cover.afvf-adhere-banner .wp-block-cover__inner-container,
+.editor-styles-wrapper .wp-block-cover.afvf-adhere-cover .wp-block-cover__inner-container {
+  position: relative !important;
+  inset: auto !important;
+  display: block !important;
+  min-height: 100%;
+  height: 100%;
+}
+.editor-styles-wrapper .afvf-adhere-banner__poster,
+.editor-styles-wrapper .afvf-adhere-cover__poster {
+  outline: 2px dashed rgba(31, 79, 163, 0.35);
+  outline-offset: 4px;
+}
+
+/* Éditeur : la grille et les cartes passent par les wrappers de blocs */
+.editor-styles-wrapper .afvf-hover-split-grid > .block-editor-inner-blocks > .block-editor-block-list__layout {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+.editor-styles-wrapper .afvf-hover-split-grid > .block-editor-inner-blocks > .block-editor-block-list__layout > * {
+  margin: 0 !important;
+}
+.editor-styles-wrapper .afvf-hover-split-card > .block-editor-inner-blocks,
+.editor-styles-wrapper .afvf-hover-split-card > .block-editor-inner-blocks > .block-editor-block-list__layout {
+  display: contents;
+}
+.editor-styles-wrapper .afvf-hover-split-card > .block-editor-inner-blocks > .block-editor-block-list__layout > * {
+  margin: 0 !important;
+}
+/* Éditeur : bouton toujours visible pour pouvoir le modifier */
+.editor-styles-wrapper .afvf-hover-split-card .afvf-hover-split-card__cta {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.editor-styles-wrapper .afvf-wix-overlay-card.is-style-afvf-hero-card-square {
+  --afvf-hero-card-width: min(440px, 90%);
+  width: min(var(--afvf-hero-card-width), 100%) !important;
+  max-width: min(var(--afvf-hero-card-width), 100%) !important;
+  aspect-ratio: 1 / 1 !important;
+  max-height: min(440px, 72vh);
+  overflow: auto;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.editor-styles-wrapper .afvf-wix-overlay-card.is-style-afvf-hero-card-rounded {
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.editor-styles-wrapper .afvf-wix-overlay-card.is-style-afvf-hero-card-left {
+  align-self: flex-start !important;
+  margin-right: auto !important;
+  margin-left: max(1.25rem, 4vw) !important;
+}
+
+.editor-styles-wrapper .afvf-wix-overlay-card.is-style-afvf-hero-card-right {
+  align-self: flex-end !important;
+  margin-left: auto !important;
+  margin-right: max(1.25rem, 4vw) !important;
+}
+
+.editor-styles-wrapper .wp-block-cover.afvf-wix-photo-card .afvf-wix-overlay-card.alignwide,
+.editor-styles-wrapper .wp-block-cover.afvf-wix-photo-card .afvf-wix-overlay-card.alignfull,
+.editor-styles-wrapper .wp-block-cover .afvf-wix-overlay-card.alignwide,
+.editor-styles-wrapper .wp-block-cover .afvf-wix-overlay-card.alignfull {
+  width: min(var(--wp--style--global--content-size, var(--afvf-hero-card-width, 920px)), calc(100% - 2rem));
+  max-width: min(var(--wp--style--global--content-size, var(--afvf-hero-card-width, 920px)), calc(100% - 2rem));
+}
+
+.editor-styles-wrapper .wp-block-cover.afvf-wix-photo-card .afvf-wix-overlay-card .wp-block-heading:not(.has-text-color),
+.editor-styles-wrapper .wp-block-cover.afvf-wix-photo-card .afvf-wix-overlay-card p:not(.has-text-color) {
+  color: #333;
+}
+
+.editor-styles-wrapper .afvf-wix-overlay-card .has-white-color.has-text-color:not(.wp-block-button__link):not(.afvf-wix-overlay-card__title):not(.has-inline-color) {
+  color: #333 !important;
+}
+
+.editor-styles-wrapper .afvf-wix-overlay-card p .has-inline-color,
+.editor-styles-wrapper .wp-block-cover .wp-block-cover__inner-container p .has-inline-color {
+  color: unset;
+}
+
+.editor-styles-wrapper .afvf-wix-overlay-card .afvf-wix-overlay-card__title:not(.has-text-color) {
+  color: #9a9a9a;
+}
+
+/* Bordure / rayon définis dans le panneau : visible à l’écran */
+.editor-styles-wrapper .afvf-wix-overlay-card[style*="border-radius"] {
+  overflow: hidden;
+}
+
+.editor-styles-wrapper .wp-block-cover.afvf-hero-entreprises {
+  position: relative;
+  isolation: isolate;
+}
+.editor-styles-wrapper .wp-block-cover.afvf-hero-entreprises .wp-block-cover__image-background {
+  object-position: 55% center;
+}
+.editor-styles-wrapper .wp-block-cover.afvf-hero-entreprises::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.98) 0%,
+    rgba(255, 255, 255, 0.92) 16%,
+    rgba(255, 255, 255, 0.55) 34%,
+    rgba(255, 255, 255, 0.12) 52%,
+    transparent 62%
+  );
+}
+.editor-styles-wrapper .wp-block-cover.afvf-hero-entreprises .wp-block-cover__inner-container {
+  position: relative;
+  z-index: 2;
+}
+.editor-styles-wrapper .afvf-hero-entreprises-title {
+  color: #e8c8b5 !important;
+}
+
+/* Kër Aïcha — galerie remonte sur la bannière (Motif 1) dans l’éditeur */
+.editor-styles-wrapper .wp-block-cover.afvf-ker-aicha-band--fond {
+  padding-bottom: clamp(10rem, 20vw, 14rem) !important;
+  overflow: visible !important;
+}
+.editor-styles-wrapper .afvf-ker-aicha-gallery-float,
+.editor-styles-wrapper .wp-block-cover.afvf-ker-aicha-band--gallery.afvf-ker-aicha-gallery-float {
+  margin-top: clamp(-14rem, -26vw, -10rem) !important;
+  background: transparent !important;
+  position: relative;
+  z-index: 3;
+}
+.editor-styles-wrapper .block-editor-block-list__block:has(.afvf-ker-aicha-band--fond)
+  + .block-editor-block-list__block:has(.afvf-ker-aicha-gallery-float) {
+  margin-top: clamp(-14rem, -26vw, -10rem) !important;
+  z-index: 3;
+}
+.editor-styles-wrapper .block-editor-block-list__block:has(.afvf-ker-aicha-gallery-float) {
+  background: transparent !important;
+}
+
+.editor-styles-wrapper .wp-block-cover.afvf-ker-aicha-band--section-gallery {
+  overflow: visible !important;
+  min-height: min(520px, 88vh) !important;
+}
+.editor-styles-wrapper .wp-block-cover.afvf-ker-aicha-band--section-gallery .wp-block-cover__inner-container {
+  justify-content: flex-end !important;
+  min-height: min(460px, 78vh);
+}
+.editor-styles-wrapper .wp-block-cover.afvf-ker-aicha-band--section-card .wp-block-cover__inner-container,
+.editor-styles-wrapper .wp-block-cover.afvf-ker-aicha-band--section-bar .wp-block-cover__inner-container {
+  justify-content: center !important;
+}
+.editor-styles-wrapper .wp-block-cover.afvf-ker-aicha-cover-grow,
+.editor-styles-wrapper .wp-block-cover.afvf-ker-aicha-band--section-card,
+.editor-styles-wrapper .wp-block-cover.afvf-ker-aicha-band--section-bar {
+  display: grid !important;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  min-height: auto !important;
+  height: auto !important;
+  overflow: hidden !important;
+  position: relative !important;
+}
+.editor-styles-wrapper .wp-block-cover.afvf-ker-aicha-cover-grow > .wp-block-cover__image-background,
+.editor-styles-wrapper .wp-block-cover.afvf-ker-aicha-cover-grow > .wp-block-cover__background,
+.editor-styles-wrapper .wp-block-cover.afvf-ker-aicha-band--section-card > .wp-block-cover__image-background,
+.editor-styles-wrapper .wp-block-cover.afvf-ker-aicha-band--section-bar > .wp-block-cover__image-background {
+  grid-row: 1;
+  grid-column: 1;
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100% !important;
+  object-fit: cover;
+}
+.editor-styles-wrapper .wp-block-cover.afvf-ker-aicha-cover-grow > .wp-block-cover__inner-container,
+.editor-styles-wrapper .wp-block-cover.afvf-ker-aicha-band--section-card > .wp-block-cover__inner-container,
+.editor-styles-wrapper .wp-block-cover.afvf-ker-aicha-band--section-bar > .wp-block-cover__inner-container {
+  grid-row: 1;
+  grid-column: 1;
+  position: relative !important;
+  z-index: 2;
+  height: auto !important;
+  min-height: 0 !important;
+}
+.editor-styles-wrapper .block-editor-block-list__block:has(.afvf-ker-aicha-band--section-card),
+.editor-styles-wrapper .block-editor-block-list__block:has(.afvf-ker-aicha-cover-grow) {
+  overflow: visible !important;
+}
+.editor-styles-wrapper .block-editor-block-list__block:has(.afvf-ker-aicha-band--section-gallery)
+  + .block-editor-block-list__block:has(.afvf-ker-aicha-band--section-card) {
+  margin-top: clamp(-2.5rem, -6vw, -1.5rem) !important;
+}
+
+/* Éditeur : carte photo + texte */
+.editor-styles-wrapper .afvf-photo-text-card > .block-editor-inner-blocks,
+.editor-styles-wrapper .afvf-photo-text-card > .block-editor-inner-blocks > .block-editor-block-list__layout {
+  display: contents;
+}
+.editor-styles-wrapper .afvf-photo-text-list > .block-editor-inner-blocks > .block-editor-block-list__layout {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.editor-styles-wrapper .afvf-photo-text-card > .block-editor-inner-blocks > .block-editor-block-list__layout > *,
+.editor-styles-wrapper .afvf-photo-text-list > .block-editor-inner-blocks > .block-editor-block-list__layout > * {
+  margin: 0 !important;
+}
+
+/* Éditeur : motif Vision (photo + carte beige) */
+.editor-styles-wrapper .afvf-vision-offset > .block-editor-inner-blocks,
+.editor-styles-wrapper .afvf-vision-offset > .block-editor-inner-blocks > .block-editor-block-list__layout {
+  display: contents;
+}
+.editor-styles-wrapper .afvf-vision-offset > .block-editor-inner-blocks > .block-editor-block-list__layout > * {
+  margin: 0 !important;
+}
+.editor-styles-wrapper .afvf-vision-offset__card > .block-editor-inner-blocks,
+.editor-styles-wrapper .afvf-vision-offset__card > .block-editor-inner-blocks > .block-editor-block-list__layout {
+  display: block;
+}
+
+/* Éditeur : grille 3×2 « cartes qui se soulèvent » (pas de mouvement au survol dans l’éditeur) */
+.editor-styles-wrapper .afvf-lift-grid > .block-editor-inner-blocks > .block-editor-block-list__layout {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 3rem 1.6rem;
+}
+.editor-styles-wrapper .afvf-lift-grid > .block-editor-inner-blocks > .block-editor-block-list__layout > * {
+  margin: 0 !important;
+}
+.editor-styles-wrapper .afvf-lift-card > .block-editor-inner-blocks,
+.editor-styles-wrapper .afvf-lift-card > .block-editor-inner-blocks > .block-editor-block-list__layout {
+  display: contents;
+}
+.editor-styles-wrapper .afvf-lift-card:hover {
+  transform: none;
+}
+
+/* Éditeur : motif Nos Cours (grille titre / carte / photo) */
+.editor-styles-wrapper .afvf-cours-band__stage > .block-editor-inner-blocks,
+.editor-styles-wrapper .afvf-cours-band__stage > .block-editor-inner-blocks > .block-editor-block-list__layout {
+  display: contents;
+}
+.editor-styles-wrapper .afvf-cours-band__card > .block-editor-inner-blocks,
+.editor-styles-wrapper .afvf-cours-band__card > .block-editor-inner-blocks > .block-editor-block-list__layout {
+  display: block;
+}
+.editor-styles-wrapper .afvf-cours-band__stage > [data-block] {
+  margin: 0 !important;
+}
+.editor-styles-wrapper .afvf-cours-band__photo img {
+  height: 100%;
+}
+
+/* Éditeur : motif Webinaire (grille photo / titre / carte) */
+.editor-styles-wrapper .afvf-webinar-band__stage > .block-editor-inner-blocks,
+.editor-styles-wrapper .afvf-webinar-band__stage > .block-editor-inner-blocks > .block-editor-block-list__layout {
+  display: contents;
+}
+.editor-styles-wrapper .afvf-webinar-band__card > .block-editor-inner-blocks,
+.editor-styles-wrapper .afvf-webinar-band__card > .block-editor-inner-blocks > .block-editor-block-list__layout {
+  display: block;
+}
+.editor-styles-wrapper .afvf-webinar-band__stage > [data-block] {
+  margin: 0 !important;
+}
+
+/* Éditeur : motif À la UNE (3 colonnes) */
+.editor-styles-wrapper .afvf-une > .block-editor-inner-blocks > .block-editor-block-list__layout {
+  display: grid;
+  grid-template-columns: 38fr 27fr 33fr;
+  grid-auto-rows: minmax(12.8rem, auto);
+  gap: 0.4rem;
+}
+.editor-styles-wrapper .afvf-une > .block-editor-inner-blocks > .block-editor-block-list__layout > * {
+  margin: 0 !important;
+}
+.editor-styles-wrapper .afvf-une-carousel > .block-editor-inner-blocks,
+.editor-styles-wrapper .afvf-une-carousel > .block-editor-inner-blocks > .block-editor-block-list__layout {
+  display: contents;
+}
+.editor-styles-wrapper .afvf-une-carousel__track > .block-editor-inner-blocks,
+.editor-styles-wrapper .afvf-une-carousel__track > .block-editor-inner-blocks > .block-editor-block-list__layout {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.4rem;
+  height: 100%;
+}
+.editor-styles-wrapper .afvf-une__news > .block-editor-inner-blocks,
+.editor-styles-wrapper .afvf-une__news > .block-editor-inner-blocks > .block-editor-block-list__layout {
+  display: grid;
+  grid-template-columns: 53fr 45fr;
+  gap: 0.4rem;
+}
+.editor-styles-wrapper .afvf-une__text > .block-editor-inner-blocks,
+.editor-styles-wrapper .afvf-une__text > .block-editor-inner-blocks > .block-editor-block-list__layout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Éditeur : motif Podcasts (grille 3 colonnes + cartes lecteur) */
+.editor-styles-wrapper .afvf-podcast__grid > .block-editor-inner-blocks > .block-editor-block-list__layout {
+  display: grid;
+  grid-template-columns: 34fr 33fr 33fr;
+  row-gap: 1.5rem;
+  align-items: start;
+}
+.editor-styles-wrapper .afvf-podcast__grid > .block-editor-inner-blocks > .block-editor-block-list__layout > * {
+  margin: 0 !important;
+}
+.editor-styles-wrapper .afvf-podcast-card {
+  height: auto;
+  min-height: 3.45rem;
+}
+.editor-styles-wrapper .afvf-podcast-card > .block-editor-inner-blocks > .block-editor-block-list__layout {
+  display: grid;
+  grid-template-columns: 3.45rem minmax(0, 1fr);
+}
+.editor-styles-wrapper .afvf-podcast-card__body > .block-editor-inner-blocks > .block-editor-block-list__layout {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Éditeur : cartes formation — aperçu du survol quand la carte est sélectionnée */
+.editor-styles-wrapper .afvf-course-rise-grid > .block-editor-inner-blocks > .block-editor-block-list__layout {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem 1.6rem;
+  align-items: stretch;
+}
+.editor-styles-wrapper .afvf-course-rise-card__head > .block-editor-inner-blocks,
+.editor-styles-wrapper .afvf-course-rise-card__head > .block-editor-inner-blocks > .block-editor-block-list__layout {
+  display: contents;
+}
+.editor-styles-wrapper .afvf-course-rise-card__photo,
+.editor-styles-wrapper .afvf-course-rise-card__blue,
+.editor-styles-wrapper .afvf-course-rise-card__objective {
+  pointer-events: auto;
+}
+.editor-styles-wrapper .afvf-course-rise-card.is-selected .afvf-course-rise-card__blue,
+.editor-styles-wrapper .afvf-course-rise-card.has-child-selected .afvf-course-rise-card__blue {
+  height: var(--afvf-rise-h-hover);
+}
+.editor-styles-wrapper .afvf-course-rise-card--peach.is-selected .afvf-course-rise-card__blue,
+.editor-styles-wrapper .afvf-course-rise-card--peach.has-child-selected .afvf-course-rise-card__blue {
+  top: calc(var(--afvf-rise-h) - var(--afvf-rise-h-hover));
+}
+.editor-styles-wrapper .afvf-course-rise-card--sand.is-selected .afvf-course-rise-card__objective,
+.editor-styles-wrapper .afvf-course-rise-card--sand.has-child-selected .afvf-course-rise-card__objective {
+  transform: translateY(-3.1rem);
+}
+.editor-styles-wrapper .afvf-course-rise-card.is-selected .afvf-course-rise-card__head::after,
+.editor-styles-wrapper .afvf-course-rise-card.has-child-selected .afvf-course-rise-card__head::after {
+  opacity: 1;
+}
+
+/* Éditeur : page Formations (Wix) */
+.editor-styles-wrapper .afvf-formations-page__head > .block-editor-inner-blocks > .block-editor-block-list__layout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 2rem;
+}
+.editor-styles-wrapper .afvf-formations-page__head > .block-editor-inner-blocks > .block-editor-block-list__layout > * {
+  margin: 0 !important;
+}
+
+/* Éditeur : motif Projets (rangées alternées) */
+.editor-styles-wrapper .afvf-zigzag__row > .block-editor-inner-blocks > .block-editor-block-list__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  min-height: inherit;
+}
+.editor-styles-wrapper .afvf-zigzag__row > .block-editor-inner-blocks > .block-editor-block-list__layout > * {
+  margin: 0 !important;
+}
+.editor-styles-wrapper .afvf-zigzag__title,
+.editor-styles-wrapper .afvf-smoke-title {
+  caret-color: #050814;
+}
+.editor-styles-wrapper .afvf-zigzag__panel > .block-editor-inner-blocks,
+.editor-styles-wrapper .afvf-zigzag__panel > .block-editor-inner-blocks > .block-editor-block-list__layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  flex: 1;
+}
+.editor-styles-wrapper .afvf-zigzag__panel .afvf-zigzag__cta {
+  margin-top: auto !important;
+}
+
+/* Éditeur : sections Événements / Actualités (shortcodes) */
+.editor-styles-wrapper .afvf-events-section {
+	padding: 2rem 1rem;
+	background: #fff;
+}
+.editor-styles-wrapper .afvf-events-section .afvf-section-title {
+	font-family: "Anton", "Impact", sans-serif;
+	font-weight: 400;
+	text-transform: uppercase;
+	text-align: center;
+	font-size: clamp(2rem, 4.6vw, 2.9rem);
+}
+.editor-styles-wrapper .afvf-events-section .wp-block-shortcode {
+	max-width: 40rem;
+	margin: 0 auto;
+	padding: 1rem;
+	border: 1px dashed #c9c9c9;
+	text-align: center;
+	color: #666;
+}
+
+/* Éditeur : motif « Soutenez-nous » (colonne bleue + image) */
+.editor-styles-wrapper .wp-block-columns.afvf-support-band {
+	gap: 0;
+	flex-wrap: nowrap;
+}
+.editor-styles-wrapper .afvf-support-band__blue {
+	align-self: stretch !important;
+	min-height: clamp(13rem, 21vw, 17.5rem);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.editor-styles-wrapper .afvf-support-band__media {
+	position: relative;
+	align-self: stretch !important;
+	min-height: clamp(13rem, 21vw, 17.5rem);
+}
+.editor-styles-wrapper .afvf-support-band__media .block-editor-inner-blocks,
+.editor-styles-wrapper .afvf-support-band__media .block-editor-block-list__layout {
+	position: absolute;
+	inset: 0;
+}
+.editor-styles-wrapper .afvf-support-band__media .wp-block-image {
+	margin: 0;
+	height: 100%;
+}
+.editor-styles-wrapper .afvf-support-band__media .wp-block-image {
+	overflow: hidden;
+}
+.editor-styles-wrapper .afvf-support-band__media .wp-block-image img {
+	display: block;
+	width: 100% !important;
+	height: 100% !important;
+	aspect-ratio: auto !important;
+	object-fit: cover;
+	object-position: center;
+}
+
+/* Éditeur : motif « Comment cela se passe ? » */
+.editor-styles-wrapper .wp-block-columns.afvf-comment__cards {
+	flex-wrap: nowrap;
+	gap: 0.6rem;
+}
+.editor-styles-wrapper .afvf-comment-step figure.afvf-comment-step__photo,
+.editor-styles-wrapper .afvf-comment-step figure.afvf-comment-step__photo img {
+	border-radius: 0;
+}
+
+/* Éditeur : motif « Enfants · Femmes · Gala » */
+.editor-styles-wrapper .wp-block-columns.afvf-gala {
+	flex-wrap: nowrap;
+	gap: 0;
+}

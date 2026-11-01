@@ -1,0 +1,996 @@
+/* Poignée « Déplacer » : éditeur uniquement (jamais sur le site public) */
+body:not(.block-editor-page):not(.wp-admin):not(.editor-styles-wrapper) .afvf-drag-handle {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Hero carte blanche : jamais de poignée « Déplacer » (réservé aux bannières Assises) */
+.editor-styles-wrapper .wp-block-cover.afvf-wix-photo-card .afvf-drag-handle,
+.editor-styles-wrapper .wp-block-cover.afvf-hero-entreprises .afvf-drag-handle,
+.editor-styles-wrapper .wp-block-cover.afvf-wix-photo-card .afvf-wix-overlay-card .afvf-drag-handle,
+.editor-styles-wrapper .wp-block-cover.afvf-hero-entreprises .afvf-wix-overlay-card .afvf-drag-handle {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Bannière — calques positionnables (afvf-banner-canvas) */
+.wp-block-cover.afvf-banner-canvas,
+.wp-block-cover.is-style-afvf-banner-canvas {
+  position: relative;
+  display: flex !important;
+  min-height: min(560px, 88vh);
+  /* Sans flex centré : le repère % = toute la bannière (comme l’éditeur) */
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+  overflow: visible;
+  box-sizing: border-box;
+}
+
+/* Image de fond WP : doit remplir le cover (display:flex + calques absolus) */
+.wp-block-cover.afvf-banner-canvas .wp-block-cover__image-background,
+.wp-block-cover.is-style-afvf-banner-canvas .wp-block-cover__image-background,
+.wp-block-cover.afvf-banner-canvas .wp-block-cover__video-background,
+.wp-block-cover.is-style-afvf-banner-canvas .wp-block-cover__video-background {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  max-width: none !important;
+  max-height: none !important;
+}
+
+.wp-block-cover.afvf-banner-canvas .wp-block-cover__background {
+  opacity: 0 !important;
+}
+
+.wp-block-cover.afvf-banner-canvas .wp-block-cover__inner-container,
+.wp-block-cover.is-style-afvf-banner-canvas .wp-block-cover__inner-container {
+  position: absolute !important;
+  inset: 0 !important;
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100% !important;
+  margin: 0;
+  padding: 0 !important;
+  box-sizing: border-box;
+  align-self: stretch !important;
+  flex: 1 1 auto !important;
+}
+
+/* Front : calques absolus (directs ou dans une composition) */
+.wp-block-cover.afvf-banner-canvas .wp-block-cover__inner-container .afvf-banner-layer,
+.wp-block-cover.is-style-afvf-banner-canvas .wp-block-cover__inner-container .afvf-banner-layer,
+.wp-block-cover.afvf-banner-canvas .wp-block-cover__inner-container :is(p, figure, .wp-block-buttons, .wp-block-group)[style*="top:"],
+.wp-block-cover.is-style-afvf-banner-canvas .wp-block-cover__inner-container :is(p, figure, .wp-block-buttons, .wp-block-group)[style*="top:"] {
+  position: absolute !important;
+  width: max-content !important;
+  max-width: min(92%, 720px) !important;
+}
+
+body:not(.block-editor-page) .wp-block-cover.afvf-banner-canvas .wp-block-cover__inner-container .afvf-banner-layer,
+body:not(.block-editor-page) .wp-block-cover.is-style-afvf-banner-canvas .wp-block-cover__inner-container .afvf-banner-layer {
+  transform: none;
+}
+
+.wp-block-cover.afvf-banner-canvas .wp-block-cover__inner-container .afvf-banner-layer[style*="right:"]:not([style*="right:auto"]),
+.wp-block-cover.is-style-afvf-banner-canvas .wp-block-cover__inner-container .afvf-banner-layer[style*="right:"]:not([style*="right:auto"]) {
+  left: auto !important;
+}
+
+/* WP impose width:100% dans Cover → texte aligné à droite collé au bord sans max-content */
+.wp-block-cover.afvf-banner-canvas .wp-block-cover__inner-container .afvf-banner-wix-lines,
+.wp-block-cover.is-style-afvf-banner-canvas .wp-block-cover__inner-container .afvf-banner-wix-lines,
+.wp-block-cover.afvf-banner-canvas .wp-block-cover__inner-container p.has-text-align-right.afvf-banner-layer,
+.wp-block-cover.is-style-afvf-banner-canvas .wp-block-cover__inner-container p.has-text-align-right.afvf-banner-layer {
+  width: max-content !important;
+  max-width: min(92%, 720px) !important;
+}
+
+.wp-block-cover.afvf-banner-canvas .wp-block-cover__inner-container .is-layout-constrained,
+.wp-block-cover.is-style-afvf-banner-canvas .wp-block-cover__inner-container .is-layout-constrained {
+  width: max-content !important;
+  max-width: min(92%, 720px) !important;
+}
+
+.wp-block-cover.afvf-banner-canvas .afvf-banner-layer,
+.wp-block-cover.is-style-afvf-banner-canvas .afvf-banner-layer {
+  cursor: grab;
+}
+
+.wp-block-cover.afvf-banner-canvas .afvf-banner-layer:active {
+  cursor: grabbing;
+}
+
+.afvf-banner-layer.is-afvf-dragging {
+  opacity: 0.92;
+  outline: 2px solid #ec5e87;
+  outline-offset: 2px;
+  z-index: 20 !important;
+}
+
+/* Poignée de déplacement (éditeur) */
+.editor-styles-wrapper .wp-block-cover.afvf-banner-canvas,
+.editor-styles-wrapper .wp-block-cover.is-style-afvf-banner-canvas {
+  overflow: visible !important;
+}
+
+.editor-styles-wrapper .wp-block-cover.afvf-banner-canvas .wp-block-cover__inner-container,
+.editor-styles-wrapper .wp-block-cover.is-style-afvf-banner-canvas .wp-block-cover__inner-container {
+  overflow: visible !important;
+}
+
+/* Éditeur : absolute seulement quand une position est connue (évite le coin haut-gauche au rechargement) */
+.editor-styles-wrapper .wp-block-cover.afvf-banner-canvas .wp-block-cover__inner-container [data-block].afvf-banner-layer,
+.editor-styles-wrapper .wp-block-cover.is-style-afvf-banner-canvas .wp-block-cover__inner-container [data-block].afvf-banner-layer,
+.editor-styles-wrapper .wp-block-cover.afvf-banner-canvas .wp-block-cover__inner-container [data-block][style*="top:"],
+.editor-styles-wrapper .wp-block-cover.is-style-afvf-banner-canvas .wp-block-cover__inner-container [data-block][style*="top:"] {
+  position: absolute;
+  width: max-content !important;
+  max-width: min(92%, 720px) !important;
+  margin: 0 !important;
+  overflow: visible !important;
+}
+
+.editor-styles-wrapper .wp-block-cover.afvf-banner-canvas .afvf-drag-handle,
+.editor-styles-wrapper .wp-block-cover.is-style-afvf-banner-canvas .afvf-drag-handle,
+.editor-styles-wrapper .wp-block-cover.afvf-adhere-banner .afvf-drag-handle,
+.editor-styles-wrapper .wp-block-cover.afvf-adhere-cover .afvf-drag-handle,
+.editor-styles-wrapper .wp-block-cover.afvf-mission-banner .afvf-drag-handle,
+.editor-styles-wrapper .wp-block-cover.afvf-former-hero .afvf-drag-handle {
+  position: absolute;
+  top: 0.2rem;
+  left: 0.2rem;
+  z-index: 100;
+  display: inline-block !important;
+  visibility: visible !important;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #fff;
+  background: #ec5e87;
+  border: none;
+  border-radius: 3px;
+  padding: 0.2rem 0.5rem;
+  cursor: grab;
+  line-height: 1.2;
+  pointer-events: auto !important;
+  touch-action: none;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.35);
+}
+
+.editor-styles-wrapper .wp-block-cover.afvf-banner-canvas .wp-block-cover__inner-container > [data-block].is-selected .afvf-drag-handle,
+.editor-styles-wrapper .wp-block-cover.is-style-afvf-banner-canvas .wp-block-cover__inner-container > [data-block].is-selected .afvf-drag-handle,
+.editor-styles-wrapper .wp-block-cover.afvf-adhere-banner .wp-block-cover__inner-container > [data-block] .afvf-drag-handle,
+.editor-styles-wrapper .wp-block-cover.afvf-adhere-cover .wp-block-cover__inner-container > [data-block] .afvf-drag-handle,
+.editor-styles-wrapper .wp-block-cover.afvf-mission-banner .wp-block-cover__inner-container > [data-block] .afvf-drag-handle,
+.editor-styles-wrapper .wp-block-cover.afvf-former-hero .wp-block-cover__inner-container > [data-block] .afvf-drag-handle,
+.editor-styles-wrapper .wp-block-cover.afvf-banner-canvas .wp-block-cover__inner-container > [data-block].is-afvf-dragging .afvf-drag-handle,
+.editor-styles-wrapper .wp-block-cover.is-style-afvf-banner-canvas .wp-block-cover__inner-container > [data-block].is-afvf-dragging .afvf-drag-handle {
+  opacity: 1;
+}
+
+.editor-styles-wrapper .wp-block-cover.afvf-banner-canvas .wp-block-cover__inner-container > [data-block]:not(.is-selected):not(.is-afvf-dragging) .afvf-drag-handle,
+.editor-styles-wrapper .wp-block-cover.is-style-afvf-banner-canvas .wp-block-cover__inner-container > [data-block]:not(.is-selected):not(.is-afvf-dragging) .afvf-drag-handle {
+  opacity: 0.92;
+}
+
+.editor-styles-wrapper .wp-block-cover.afvf-adhere-banner .wp-block-cover__inner-container [data-block].afvf-banner-layer,
+.editor-styles-wrapper .wp-block-cover.afvf-adhere-cover .wp-block-cover__inner-container [data-block].afvf-banner-layer,
+.editor-styles-wrapper .wp-block-cover.afvf-mission-banner .wp-block-cover__inner-container [data-block].afvf-banner-layer,
+.editor-styles-wrapper .wp-block-cover.afvf-former-hero .wp-block-cover__inner-container [data-block].afvf-banner-layer,
+.editor-styles-wrapper .wp-block-cover.afvf-adhere-banner .wp-block-cover__inner-container [data-block][style*="top:"],
+.editor-styles-wrapper .wp-block-cover.afvf-adhere-cover .wp-block-cover__inner-container [data-block][style*="top:"],
+.editor-styles-wrapper .wp-block-cover.afvf-mission-banner .wp-block-cover__inner-container [data-block][style*="top:"],
+.editor-styles-wrapper .wp-block-cover.afvf-former-hero .wp-block-cover__inner-container [data-block][style*="top:"] {
+  position: absolute !important;
+  width: max-content !important;
+  max-width: min(92%, 720px) !important;
+  margin: 0 !important;
+  overflow: visible !important;
+}
+.editor-styles-wrapper .wp-block-cover.afvf-adhere-banner .wp-block-cover__inner-container [data-block]:has(.afvf-adhere-cover__poster),
+.editor-styles-wrapper .wp-block-cover.afvf-adhere-cover .wp-block-cover__inner-container [data-block]:has(.afvf-adhere-cover__poster),
+.editor-styles-wrapper .wp-block-cover.afvf-mission-banner .wp-block-cover__inner-container [data-block]:has(.afvf-adhere-cover__poster),
+.editor-styles-wrapper .wp-block-cover.afvf-adhere-banner .wp-block-cover__inner-container [data-block]:has(.afvf-adhere-banner__poster),
+.editor-styles-wrapper .wp-block-cover.afvf-adhere-cover .wp-block-cover__inner-container [data-block]:has(.afvf-adhere-banner__poster),
+.editor-styles-wrapper .wp-block-cover.afvf-mission-banner .wp-block-cover__inner-container [data-block]:has(.afvf-adhere-banner__poster) {
+  max-width: min(96%, 960px) !important;
+}
+
+.editor-styles-wrapper .wp-block-cover.afvf-adhere-banner,
+.editor-styles-wrapper .wp-block-cover.afvf-adhere-cover,
+.editor-styles-wrapper .wp-block-cover.afvf-mission-banner,
+.editor-styles-wrapper .wp-block-cover.afvf-former-hero {
+  overflow: visible !important;
+}
+
+.editor-styles-wrapper .wp-block-cover.afvf-adhere-banner .wp-block-image,
+.editor-styles-wrapper .wp-block-cover.afvf-adhere-cover .wp-block-image,
+.editor-styles-wrapper .wp-block-cover.afvf-mission-banner .wp-block-image,
+.editor-styles-wrapper .wp-block-cover.afvf-adhere-banner .wp-block-buttons,
+.editor-styles-wrapper .wp-block-cover.afvf-adhere-cover .wp-block-buttons,
+.editor-styles-wrapper .wp-block-cover.afvf-mission-banner .wp-block-buttons,
+.editor-styles-wrapper .wp-block-cover.afvf-former-hero .wp-block-heading,
+.editor-styles-wrapper .wp-block-cover.afvf-former-hero .wp-block-group {
+  pointer-events: auto !important;
+}
+
+.editor-styles-wrapper .wp-block-cover.afvf-adhere-banner [data-block].is-afvf-dragging,
+.editor-styles-wrapper .wp-block-cover.afvf-adhere-cover [data-block].is-afvf-dragging,
+.editor-styles-wrapper .wp-block-cover.afvf-mission-banner [data-block].is-afvf-dragging,
+.editor-styles-wrapper .wp-block-cover.afvf-former-hero [data-block].is-afvf-dragging {
+  z-index: 30 !important;
+  cursor: grabbing !important;
+}
+
+.editor-styles-wrapper .wp-block-cover.afvf-adhere-banner .afvf-drag-handle,
+.editor-styles-wrapper .wp-block-cover.afvf-adhere-cover .afvf-drag-handle,
+.editor-styles-wrapper .wp-block-cover.afvf-mission-banner .afvf-drag-handle,
+.editor-styles-wrapper .wp-block-cover.afvf-former-hero .afvf-drag-handle {
+  cursor: grab !important;
+  pointer-events: auto !important;
+  touch-action: none;
+  z-index: 999 !important;
+}
+
+/* Former : le déplacement porte sur [data-block], pas sur le titre / la bulle en CSS */
+.editor-styles-wrapper .wp-block-cover.afvf-former-hero .wp-block-cover__inner-container > [data-block] .afvf-former-hero__title,
+.editor-styles-wrapper .wp-block-cover.afvf-former-hero .wp-block-cover__inner-container > [data-block] .afvf-former-hero__disc {
+  position: static !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: none !important;
+}
+.editor-styles-wrapper .wp-block-cover.afvf-former-hero .wp-block-cover__inner-container > [data-block]:has(.afvf-former-hero__disc) {
+  width: max-content !important;
+  max-width: min(300px, 72vw) !important;
+}
+.wp-block-cover.afvf-banner-canvas .afvf-banner-qr-image {
+  max-width: 118px;
+  background: #fff;
+  padding: 0.35rem;
+  box-sizing: border-box;
+}
+.wp-block-cover.afvf-banner-canvas .afvf-banner-qr-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Maquette accueil (logo, titre droite, ENTREZ, QR) — hauteur proche de l’éditeur */
+.wp-block-cover.afvf-banner-canvas,
+.wp-block-cover.is-style-afvf-banner-canvas {
+  min-height: min(680px, 92vh);
+}
+.wp-block-cover.afvf-banner-canvas .afvf-wix-hero-logo {
+  max-width: min(300px, 42vw);
+  width: max-content !important;
+  margin: 0;
+}
+.wp-block-cover.afvf-banner-canvas .afvf-wix-hero-logo img {
+  width: 100%;
+  height: auto;
+}
+/* Titre 4 lignes : Montserrat, blanc + « Des / De » rose pâle, tailles croissantes (comme la maquette) */
+.wp-block-cover.afvf-banner-canvas .afvf-banner-wix-lines,
+.wp-block-cover.is-style-afvf-banner-canvas .afvf-banner-wix-lines {
+  --afvf-title-size: clamp(1.5rem, 3.6vw, 3rem);
+  --afvf-title-pink: #f6a5b7;
+  font-family: "Montserrat", "Century Gothic", "Futura", "Poppins", sans-serif;
+  text-align: right;
+  font-weight: 500;
+  text-transform: none;
+  font-size: var(--afvf-title-size);
+  line-height: 1.08;
+  letter-spacing: 0.01em;
+  margin: 0;
+  color: #fff;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.35);
+}
+.wp-block-cover.afvf-banner-canvas .afvf-banner-wix-lines p,
+.wp-block-cover.is-style-afvf-banner-canvas .afvf-banner-wix-lines p {
+  font-family: inherit;
+  text-align: right;
+  margin: 0;
+  padding: 0;
+  line-height: 1.08;
+  white-space: nowrap;
+  text-shadow: inherit;
+}
+/* Blanc par défaut seulement si pas de couleur de bloc / mot */
+.wp-block-cover.afvf-banner-canvas .afvf-banner-wix-lines p:not(.has-text-color),
+.wp-block-cover.is-style-afvf-banner-canvas .afvf-banner-wix-lines p:not(.has-text-color) {
+  color: #fff;
+}
+/* Tailles maquette : seulement si vous n’avez pas réglé la typo du paragraphe dans l’éditeur */
+.wp-block-cover.afvf-banner-canvas .afvf-banner-wix-lines p.afvf-wl-1:not(.has-custom-font-size):not([style*="font-size"]) {
+  font-size: calc(var(--afvf-title-size) * 0.52);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.wp-block-cover.afvf-banner-canvas .afvf-banner-wix-lines p.afvf-wl-2:not(.has-custom-font-size):not([style*="font-size"]),
+.wp-block-cover.afvf-banner-canvas .afvf-banner-wix-lines p.afvf-wl-3:not(.has-custom-font-size):not([style*="font-size"]) {
+  font-size: calc(var(--afvf-title-size) * 0.86);
+  font-weight: 600;
+}
+.wp-block-cover.afvf-banner-canvas .afvf-banner-wix-lines p.afvf-wl-4:not(.has-custom-font-size):not([style*="font-size"]) {
+  font-size: var(--afvf-title-size);
+  font-weight: 600;
+}
+/* Couleur mot à mot (sélection dans le texte) — ne pas écraser */
+.wp-block-cover.afvf-banner-canvas .afvf-banner-wix-lines .has-inline-color,
+.wp-block-cover.is-style-afvf-banner-canvas .afvf-banner-wix-lines .has-inline-color,
+.wp-block-cover.afvf-banner-canvas .afvf-banner-wix-lines mark.has-inline-color,
+.wp-block-cover.is-style-afvf-banner-canvas .afvf-banner-wix-lines mark.has-inline-color {
+  background: transparent !important;
+}
+.wp-block-cover.afvf-banner-canvas .afvf-banner-wix-lines .afvf-wl-pink,
+.wp-block-cover.is-style-afvf-banner-canvas .afvf-banner-wix-lines .afvf-wl-pink {
+  color: var(--afvf-title-pink) !important;
+  font-weight: 500;
+}
+.editor-styles-wrapper .wp-block-cover .afvf-banner-wix-lines p .has-inline-color,
+.editor-styles-wrapper .wp-block-cover .afvf-banner-wix-lines mark.has-inline-color {
+  background: transparent !important;
+}
+/* Ancien titre en un seul paragraphe : 1re ligne plus petite */
+.wp-block-cover.afvf-banner-canvas p.afvf-banner-wix-lines::first-line {
+  font-size: calc(var(--afvf-title-size) * 0.52);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.wp-block-cover.afvf-banner-canvas .afvf-banner-entrez .wp-block-button__link {
+  padding: 0.45rem 1.35rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+}
+.wp-block-cover.afvf-banner-canvas .afvf-banner-qr-wrap {
+  background: #fff;
+  padding: 0.35rem 0.35rem 0;
+  max-width: 118px;
+  box-sizing: border-box;
+}
+.wp-block-cover.afvf-banner-canvas .afvf-banner-qr-wrap .wp-block-image {
+  margin: 0;
+}
+.wp-block-cover.afvf-banner-canvas .afvf-banner-qr-caption {
+  background: #1a1a1a;
+  color: #fff;
+  text-align: center;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.25rem;
+  margin: 0;
+}
+
+/* Bannière Assises — maquette (fond mains + CTA gauche + affiche droite) */
+.wp-block-cover.afvf-banner-assises {
+  min-height: min(620px, 88vh);
+}
+.wp-block-cover.afvf-banner-assises .afvf-assises-cta {
+  font-family: "Libre Baskerville", "Georgia", "Times New Roman", serif;
+  font-size: clamp(1.75rem, 4vw, 3.15rem);
+  line-height: 1.12;
+  font-weight: 400;
+  margin: 0;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45);
+}
+.wp-block-cover.afvf-banner-assises .afvf-assises-cta a {
+  color: #fff;
+  text-decoration: none;
+  box-shadow: none;
+}
+.wp-block-cover.afvf-banner-assises .afvf-assises-cta a:hover,
+.wp-block-cover.afvf-banner-assises .afvf-assises-cta a:focus {
+  color: #fff;
+  opacity: 0.95;
+}
+.wp-block-cover.afvf-banner-assises .afvf-assises-programme,
+.wp-block-cover.afvf-banner-assises .afvf-assises-cta mark.has-inline-color {
+  color: #ec5e87 !important;
+  background: transparent !important;
+  border-bottom: 0.18em solid #ec5e87;
+  padding-bottom: 0.04em;
+  font-style: normal;
+  font-weight: 700;
+}
+.wp-block-cover.afvf-banner-assises .afvf-assises-poster {
+  width: min(360px, 38vw) !important;
+  max-width: min(360px, 92vw) !important;
+  margin: 0;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+.wp-block-cover.afvf-banner-assises .afvf-assises-poster img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+@media (max-width: 782px) {
+  .wp-block-cover.afvf-banner-assises .afvf-assises-poster {
+    width: min(94vw, 400px) !important;
+    max-width: 94vw !important;
+  }
+  .wp-block-cover.afvf-banner-assises .afvf-assises-cta {
+    font-size: clamp(1.25rem, 5vw, 1.75rem);
+  }
+}
+
+/* Bannière Dons et Legs — photo N&B + titre dégradé + vidéo + bandeau bleu */
+.wp-block-cover.afvf-banner-dons {
+  min-height: min(520px, 88vh);
+}
+.wp-block-cover.afvf-banner-dons .afvf-dons-title {
+  font-family: "Poppins", var(--font-body, sans-serif);
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: 0;
+  text-transform: none;
+  margin: 0;
+  background: linear-gradient(90deg, #ec5e87 0%, #e55a8f 38%, #b865d8 72%, #a56ce4 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+.wp-block-cover.afvf-banner-dons .afvf-dons-video {
+  margin: 0;
+}
+.wp-block-cover.afvf-banner-dons .afvf-dons-video video {
+  display: block;
+  width: min(36vw, 560px);
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: #000;
+}
+.wp-block-cover.afvf-banner-dons .afvf-dons-tagline {
+  font-family: "Poppins", var(--font-body, sans-serif);
+  font-size: clamp(0.95rem, 1.7vw, 1.4rem);
+  font-weight: 600;
+  line-height: 1.3;
+  white-space: nowrap;
+  margin: 0;
+  padding: 0.1rem 0.4rem;
+  color: #fff;
+  background: #1442a8;
+}
+.wp-block-cover.afvf-banner-dons .afvf-dons-tagline a {
+  color: #fff;
+  text-decoration: none;
+}
+@media (max-width: 782px) {
+  .wp-block-cover.afvf-banner-dons .afvf-dons-video video {
+    width: min(44vw, 320px);
+  }
+}
+
+/*
+ * Hero « photo + carte blanche » (Entreprises…) : ne pas appliquer le mode calques
+ * (inner-container en absolute + padding 0). Souvent ajouté par erreur via l’éditeur calques.
+ */
+.wp-block-cover.afvf-wix-photo-card:not(.afvf-ker-aicha-page),
+.wp-block-cover.afvf-hero-entreprises,
+.editor-styles-wrapper .wp-block-cover.afvf-wix-photo-card:not(.afvf-ker-aicha-page),
+.editor-styles-wrapper .wp-block-cover.afvf-hero-entreprises {
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: min(560px, 88vh);
+}
+.wp-block-cover.afvf-wix-photo-card:not(.afvf-ker-aicha-page) .wp-block-cover__inner-container,
+.wp-block-cover.afvf-hero-entreprises .wp-block-cover__inner-container,
+.editor-styles-wrapper .wp-block-cover.afvf-wix-photo-card:not(.afvf-ker-aicha-page) .wp-block-cover__inner-container,
+.editor-styles-wrapper .wp-block-cover.afvf-hero-entreprises .wp-block-cover__inner-container {
+  position: relative !important;
+  inset: auto !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: min(480px, 70vh) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 2.5rem 1.25rem !important;
+  box-sizing: border-box;
+}
+body.afvf-hero-under-header .afvf-block-content > .wp-block-cover:first-child.afvf-wix-photo-card .wp-block-cover__inner-container,
+body.afvf-hero-under-header .afvf-block-content > .wp-block-cover:first-child.afvf-hero-entreprises .wp-block-cover__inner-container,
+body.afvf-hero-under-header .afvf-block-content .wp-block-cover.alignfull.afvf-wix-photo-card:first-of-type .wp-block-cover__inner-container,
+body.afvf-hero-under-header .afvf-block-content .wp-block-cover.alignfull.afvf-hero-entreprises:first-of-type .wp-block-cover__inner-container {
+  padding-top: 2.5rem !important;
+  padding-bottom: 2.5rem !important;
+}
+.wp-block-cover.afvf-wix-photo-card .wp-block-cover__inner-container .afvf-wix-overlay-card,
+.wp-block-cover.afvf-hero-entreprises .wp-block-cover__inner-container .afvf-wix-overlay-card,
+.editor-styles-wrapper .wp-block-cover.afvf-wix-photo-card .wp-block-cover__inner-container .afvf-wix-overlay-card,
+.editor-styles-wrapper .wp-block-cover.afvf-hero-entreprises .wp-block-cover__inner-container .afvf-wix-overlay-card {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  /* largeur : main.css / editor-hero-card.css (content-size éditeur) */
+}
+
+/*
+ * Kër Aïcha (Motifs 1–3) : le style « calques » ne doit pas figer inner-container
+ * en absolute (sinon la carte blanche est coupée sur le site public).
+ */
+.wp-block-cover.afvf-ker-aicha-band--section-card.afvf-banner-canvas,
+.wp-block-cover.afvf-ker-aicha-band--section-card.is-style-afvf-banner-canvas,
+.wp-block-cover.afvf-ker-aicha-band--section-bar.afvf-banner-canvas,
+.wp-block-cover.afvf-ker-aicha-band--section-bar.is-style-afvf-banner-canvas,
+.editor-styles-wrapper .wp-block-cover.afvf-ker-aicha-band--section-card.afvf-banner-canvas,
+.editor-styles-wrapper .wp-block-cover.afvf-ker-aicha-band--section-card.is-style-afvf-banner-canvas,
+.editor-styles-wrapper .wp-block-cover.afvf-ker-aicha-band--section-bar.afvf-banner-canvas,
+.editor-styles-wrapper .wp-block-cover.afvf-ker-aicha-band--section-bar.is-style-afvf-banner-canvas {
+  display: grid !important;
+  grid-template-columns: 1fr;
+  grid-template-rows: minmax(0, auto);
+  min-height: auto !important;
+  height: auto !important;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+  overflow: visible !important;
+}
+
+.wp-block-cover.afvf-ker-aicha-band--section-gallery.afvf-banner-canvas,
+.wp-block-cover.afvf-ker-aicha-band--section-gallery.is-style-afvf-banner-canvas,
+.editor-styles-wrapper .wp-block-cover.afvf-ker-aicha-band--section-gallery.afvf-banner-canvas,
+.editor-styles-wrapper .wp-block-cover.afvf-ker-aicha-band--section-gallery.is-style-afvf-banner-canvas {
+  display: block !important;
+  min-height: min(520px, 88vh) !important;
+  overflow: visible !important;
+}
+
+.wp-block-cover.afvf-ker-aicha-band--section-card.afvf-banner-canvas .wp-block-cover__inner-container,
+.wp-block-cover.afvf-ker-aicha-band--section-card.is-style-afvf-banner-canvas .wp-block-cover__inner-container,
+.wp-block-cover.afvf-ker-aicha-band--section-bar.afvf-banner-canvas .wp-block-cover__inner-container,
+.wp-block-cover.afvf-ker-aicha-band--section-bar.is-style-afvf-banner-canvas .wp-block-cover__inner-container,
+.editor-styles-wrapper .wp-block-cover.afvf-ker-aicha-band--section-card.afvf-banner-canvas .wp-block-cover__inner-container,
+.editor-styles-wrapper .wp-block-cover.afvf-ker-aicha-band--section-card.is-style-afvf-banner-canvas .wp-block-cover__inner-container,
+.editor-styles-wrapper .wp-block-cover.afvf-ker-aicha-band--section-bar.afvf-banner-canvas .wp-block-cover__inner-container,
+.editor-styles-wrapper .wp-block-cover.afvf-ker-aicha-band--section-bar.is-style-afvf-banner-canvas .wp-block-cover__inner-container {
+  position: relative !important;
+  inset: auto !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  flex: none !important;
+}
+
+.wp-block-cover.afvf-ker-aicha-band--section-gallery.afvf-banner-canvas .wp-block-cover__inner-container,
+.wp-block-cover.afvf-ker-aicha-band--section-gallery.is-style-afvf-banner-canvas .wp-block-cover__inner-container,
+.editor-styles-wrapper .wp-block-cover.afvf-ker-aicha-band--section-gallery.afvf-banner-canvas .wp-block-cover__inner-container,
+.editor-styles-wrapper .wp-block-cover.afvf-ker-aicha-band--section-gallery.is-style-afvf-banner-canvas .wp-block-cover__inner-container {
+  position: relative !important;
+  inset: auto !important;
+  height: auto !important;
+  min-height: min(460px, 78vh) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  padding: 0 !important;
+}
+
+.wp-block-cover.afvf-ker-aicha-band--section-card .wp-block-cover__inner-container .afvf-ker-aicha-card,
+.wp-block-cover.afvf-ker-aicha-band--section-bar .wp-block-cover__inner-container .afvf-ker-aicha-bar-wrap,
+.editor-styles-wrapper .wp-block-cover.afvf-ker-aicha-band--section-card .wp-block-cover__inner-container .afvf-ker-aicha-card,
+.editor-styles-wrapper .wp-block-cover.afvf-ker-aicha-band--section-bar .wp-block-cover__inner-container .afvf-ker-aicha-bar-wrap {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  width: min(780px, 100%) !important;
+  max-width: 780px !important;
+}
+
+/* Bannière Adhérer : calques « Déplacer » (inner-container reste en flux) */
+.wp-block-cover.afvf-adhere-banner .wp-block-cover__inner-container,
+.wp-block-cover.afvf-adhere-cover .wp-block-cover__inner-container,
+.wp-block-cover.afvf-mission-banner .wp-block-cover__inner-container,
+.editor-styles-wrapper .wp-block-cover.afvf-adhere-banner .wp-block-cover__inner-container,
+.editor-styles-wrapper .wp-block-cover.afvf-adhere-cover .wp-block-cover__inner-container,
+.editor-styles-wrapper .wp-block-cover.afvf-mission-banner .wp-block-cover__inner-container {
+  position: relative !important;
+  inset: auto !important;
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: visible !important;
+}
+.editor-styles-wrapper .wp-block-cover.afvf-adhere-banner .wp-block-cover__inner-container > [data-block],
+.editor-styles-wrapper .wp-block-cover.afvf-adhere-cover .wp-block-cover__inner-container > [data-block],
+.editor-styles-wrapper .wp-block-cover.afvf-mission-banner .wp-block-cover__inner-container > [data-block] {
+  max-width: min(92%, 720px);
+}
+.editor-styles-wrapper .wp-block-cover.afvf-adhere-banner .wp-block-cover__inner-container > [data-block]:has(.afvf-adhere-cover__poster),
+.editor-styles-wrapper .wp-block-cover.afvf-adhere-cover .wp-block-cover__inner-container > [data-block]:has(.afvf-adhere-cover__poster),
+.editor-styles-wrapper .wp-block-cover.afvf-mission-banner .wp-block-cover__inner-container > [data-block]:has(.afvf-adhere-cover__poster),
+.editor-styles-wrapper .wp-block-cover.afvf-adhere-banner .wp-block-cover__inner-container > [data-block]:has(.afvf-adhere-banner__poster),
+.editor-styles-wrapper .wp-block-cover.afvf-adhere-cover .wp-block-cover__inner-container > [data-block]:has(.afvf-adhere-banner__poster),
+.editor-styles-wrapper .wp-block-cover.afvf-mission-banner .wp-block-cover__inner-container > [data-block]:has(.afvf-adhere-banner__poster) {
+  max-width: min(96%, 960px);
+}
+
+/* Nos Missions : le conteneur interne recouvre exactement la bannière (référence des % top / left) */
+.wp-block-cover.afvf-mission-banner > .wp-block-cover__inner-container,
+.editor-styles-wrapper .wp-block-cover.afvf-mission-banner > .wp-block-cover__inner-container {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+}
+.editor-styles-wrapper .wp-block-cover.afvf-mission-banner .afvf-drag-handle,
+.editor-styles-wrapper .wp-block-cover.afvf-former-hero .afvf-drag-handle {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Former — calques « Déplacer » (repère = toute la couverture) */
+.wp-block-cover.afvf-former-hero > .wp-block-cover__inner-container,
+.editor-styles-wrapper .wp-block-cover.afvf-former-hero > .wp-block-cover__inner-container {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  display: block !important;
+  padding: 0 !important;
+  overflow: visible !important;
+}
+.editor-styles-wrapper .wp-block-cover.afvf-former-hero .wp-block-cover__inner-container [data-block].afvf-banner-layer,
+.editor-styles-wrapper .wp-block-cover.afvf-former-hero .wp-block-cover__inner-container [data-block][style*="top:"] {
+  position: absolute !important;
+  margin: 0 !important;
+  overflow: visible !important;
+}
+.wp-block-cover.afvf-former-hero .afvf-former-hero__disc[class*="afvf-pos-"],
+.wp-block-cover.afvf-former-hero .afvf-former-hero__disc.afvf-banner-layer {
+  max-width: min(300px, 72vw) !important;
+}
+
+/* Bannière « Nous-rire la vie » : photo + gros titre blanc + 2 boutons */
+.wp-block-cover.afvf-banner-nous {
+  min-height: min(620px, 90vh);
+}
+.wp-block-cover.afvf-banner-nous .afvf-nous-hero__title {
+  margin: 0;
+  font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(1.5rem, 6.9vw, 7rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: #fff;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.18);
+}
+.wp-block-cover.afvf-banner-nous .afvf-nous-hero__sub {
+  margin: 0;
+  font-family: Arial, "Helvetica Neue", sans-serif;
+  font-size: clamp(0.85rem, 2vw, 1.6rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  color: #fff;
+}
+.wp-block-cover.afvf-banner-nous .afvf-nous-hero__btn1,
+.wp-block-cover.afvf-banner-nous .afvf-nous-hero__btn2 {
+  margin: 0;
+  width: clamp(8rem, 14.5vw, 11rem);
+}
+.wp-block-cover.afvf-banner-nous .afvf-nous-hero__btn1 .wp-block-button,
+.wp-block-cover.afvf-banner-nous .afvf-nous-hero__btn2 .wp-block-button,
+.wp-block-cover.afvf-banner-nous .afvf-nous-hero__btn1 .wp-block-button__link,
+.wp-block-cover.afvf-banner-nous .afvf-nous-hero__btn2 .wp-block-button__link {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+}
+.wp-block-cover.afvf-banner-nous .afvf-nous-hero__yellow .wp-block-button__link {
+  padding: 0.5rem 0.7rem;
+  border-radius: 8px;
+  background: #fff06a;
+  color: #111;
+  font-family: "Poppins", var(--font-body, sans-serif);
+  font-size: clamp(0.62rem, 1.15vw, 0.85rem);
+  font-weight: 600;
+  line-height: 1.3;
+}
+.wp-block-cover.afvf-banner-nous .afvf-nous-hero__green .wp-block-button__link {
+  padding: 0.55rem 0.7rem;
+  border-radius: 3px;
+  background: #3f7a5a;
+  color: #fff;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(0.65rem, 1.2vw, 0.9rem);
+  font-style: italic;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.wp-block-cover.afvf-banner-nous .afvf-nous-hero__yellow .wp-block-button__link:hover {
+  background: #ffe83a;
+}
+.wp-block-cover.afvf-banner-nous .afvf-nous-hero__green .wp-block-button__link:hover {
+  background: #336a4c;
+}
+
+.wp-block-cover.afvf-banner-nous .wp-block-buttons.afvf-nous-hero__btn1,
+.wp-block-cover.afvf-banner-nous .wp-block-buttons.afvf-nous-hero__btn2 {
+  display: block !important;
+}
+
+.wp-block-cover.afvf-banner-nous .wp-block-buttons.afvf-nous-hero__btn1,
+.wp-block-cover.afvf-banner-nous .wp-block-buttons.afvf-nous-hero__btn2 {
+  width: clamp(8rem, 14.5vw, 11rem) !important;
+  max-width: none !important;
+}
+.wp-block-cover.afvf-banner-nous .wp-block-buttons .wp-block-button {
+  width: 100% !important;
+  flex: 1 1 100%;
+}
+
+/* Le système de calques impose width:max-content : on égalise via min-width sur le lien */
+.wp-block-cover.afvf-banner-nous .wp-block-buttons .wp-block-button__link {
+  min-width: clamp(8rem, 14.5vw, 11rem);
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+/* Bannière vidéo « Nous-rire la vie » (FONDATION / titre / AFVF) */
+.wp-block-cover.afvf-eye-hero {
+  min-height: min(520px, 78vh);
+  background: linear-gradient(115deg, #9a7360 0%, #6c5a58 45%, #2f4a60 100%);
+  color: #fff;
+}
+.wp-block-cover.afvf-eye-hero .wp-block-cover__video-background,
+.wp-block-cover.afvf-eye-hero video.afvf-bg-video {
+  z-index: 0;
+}
+.wp-block-cover.afvf-eye-hero .wp-block-cover__inner-container {
+  z-index: 1;
+}
+.wp-block-cover.afvf-eye-hero .afvf-eye-hero__kicker {
+  margin: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(0.55rem, 1.15vw, 0.9rem);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.75);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.wp-block-cover.afvf-eye-hero .afvf-eye-hero__title {
+  margin: 0;
+  font-family: "Poppins", system-ui, sans-serif;
+  font-size: clamp(1.6rem, 4.4vw, 4.2rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: 0;
+  color: #fff;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.25);
+}
+.wp-block-cover.afvf-eye-hero .afvf-eye-hero__tag {
+  margin: 0;
+  font-family: "Poppins", system-ui, sans-serif;
+  font-size: clamp(0.5rem, 0.95vw, 0.75rem);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: #fff;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   Téléphone / petite tablette : les calques « Déplacer » (positions en % faites
+   pour le bureau) sont empilés au centre, sinon ils débordent ou se chevauchent.
+   Site public uniquement (l’éditeur garde le mode calques).
+   ========================================================================== */
+@media (max-width: 782px) {
+  body:not(.editor-styles-wrapper) :is(.wp-block-cover.afvf-banner-canvas, .wp-block-cover.is-style-afvf-banner-canvas, .wp-block-cover.afvf-former-hero) {
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: 20rem !important;
+    overflow: hidden;
+  }
+  body:not(.editor-styles-wrapper) :is(.wp-block-cover.afvf-banner-canvas, .wp-block-cover.is-style-afvf-banner-canvas, .wp-block-cover.afvf-former-hero) > .wp-block-cover__inner-container {
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    flex: 0 1 auto !important;
+    align-self: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.9rem;
+    padding: 3rem 1.1rem 2.5rem !important;
+    box-sizing: border-box;
+  }
+  body:not(.editor-styles-wrapper) :is(.wp-block-cover.afvf-banner-canvas, .wp-block-cover.is-style-afvf-banner-canvas, .wp-block-cover.afvf-former-hero) > .wp-block-cover__inner-container :is(.afvf-banner-layer, .afvf-former-hero__title, .afvf-former-hero__disc, [style*="top:"], [class*="afvf-pos-t"]) {
+    position: relative !important;
+    inset: auto !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+    width: auto !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    text-align: center !important;
+    box-sizing: border-box;
+  }
+  body:not(.editor-styles-wrapper) :is(.wp-block-cover.afvf-banner-canvas, .wp-block-cover.is-style-afvf-banner-canvas) > .wp-block-cover__inner-container .afvf-banner-wix-lines {
+    width: 100% !important;
+    text-align: center !important;
+  }
+  body:not(.editor-styles-wrapper) :is(.wp-block-cover.afvf-banner-canvas, .wp-block-cover.is-style-afvf-banner-canvas) > .wp-block-cover__inner-container .afvf-banner-wix-lines p {
+    text-align: center !important;
+    white-space: normal !important;
+  }
+  body:not(.editor-styles-wrapper) :is(.wp-block-cover.afvf-banner-canvas, .wp-block-cover.is-style-afvf-banner-canvas, .wp-block-cover.afvf-former-hero) > .wp-block-cover__inner-container :is(p, h1, h2, h3, h4, .wp-block-heading) {
+    overflow-wrap: anywhere;
+    max-width: 100% !important;
+  }
+  body:not(.editor-styles-wrapper) :is(.wp-block-cover.afvf-banner-canvas, .wp-block-cover.is-style-afvf-banner-canvas) > .wp-block-cover__inner-container .wp-block-buttons {
+    justify-content: center !important;
+    width: 100% !important;
+  }
+  body:not(.editor-styles-wrapper) :is(.wp-block-cover.afvf-banner-canvas, .wp-block-cover.is-style-afvf-banner-canvas) > .wp-block-cover__inner-container figure,
+  body:not(.editor-styles-wrapper) :is(.wp-block-cover.afvf-banner-canvas, .wp-block-cover.is-style-afvf-banner-canvas) > .wp-block-cover__inner-container .wp-block-image {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  body:not(.editor-styles-wrapper) :is(.wp-block-cover.afvf-banner-canvas, .wp-block-cover.is-style-afvf-banner-canvas) > .wp-block-cover__inner-container img,
+  body:not(.editor-styles-wrapper) :is(.wp-block-cover.afvf-banner-canvas, .wp-block-cover.is-style-afvf-banner-canvas) > .wp-block-cover__inner-container video {
+    max-width: 100%;
+    height: auto;
+  }
+  body:not(.editor-styles-wrapper) .wp-block-cover.afvf-banner-canvas .afvf-wix-hero-logo {
+    width: min(220px, 60vw) !important;
+  }
+  body:not(.editor-styles-wrapper) .wp-block-cover.afvf-banner-dons .afvf-dons-video video,
+  body:not(.editor-styles-wrapper) .wp-block-cover.afvf-banner-dons .afvf-dons-tagline {
+    width: auto;
+    max-width: 100%;
+    white-space: normal;
+  }
+  body:not(.editor-styles-wrapper) .wp-block-cover.afvf-banner-dons .afvf-dons-video video {
+    width: min(86vw, 420px);
+  }
+  body:not(.editor-styles-wrapper) .wp-block-cover.afvf-banner-dons .afvf-dons-title {
+    font-size: clamp(2rem, 10vw, 3rem);
+  }
+  body:not(.editor-styles-wrapper) .wp-block-cover.afvf-former-hero .afvf-former-hero__disc {
+    width: min(300px, 86vw) !important;
+  }
+  body:not(.editor-styles-wrapper) .wp-block-cover.afvf-wix-fixed-media .afvf-wix-hero-quote {
+    font-size: 1rem;
+  }
+  body:not(.editor-styles-wrapper) .wp-block-cover.afvf-wix-fixed-media .afvf-wix-hero-hashtag {
+    font-size: clamp(1.25rem, 7vw, 2rem) !important;
+    letter-spacing: 0.02em;
+  }
+  body:not(.editor-styles-wrapper) .wp-block-cover .afvf-eye-hero__title {
+    font-size: clamp(1.7rem, 7.4vw, 2.3rem) !important;
+  }
+  body.afvf-hero-under-header:not(.editor-styles-wrapper) .afvf-block-content > .wp-block-cover.afvf-former-hero:first-child > .wp-block-cover__inner-container {
+    padding-top: calc(var(--header-bar-height) * 2 + 1.25rem) !important;
+  }
+  body.has-topbar.afvf-hero-under-header:not(.editor-styles-wrapper) .afvf-block-content > .wp-block-cover.afvf-former-hero:first-child > .wp-block-cover__inner-container {
+    padding-top: calc((var(--topbar-height) + var(--header-bar-height)) * 2 + 1.25rem) !important;
+  }
+  body.afvf-hero-under-header:not(.editor-styles-wrapper) .afvf-block-content > .wp-block-cover:is(.afvf-banner-canvas, .is-style-afvf-banner-canvas):first-child > .wp-block-cover__inner-container {
+    padding-top: calc(var(--header-bar-height) + 3rem) !important;
+  }
+  body.has-topbar.afvf-hero-under-header:not(.editor-styles-wrapper) .afvf-block-content > .wp-block-cover:is(.afvf-banner-canvas, .is-style-afvf-banner-canvas):first-child > .wp-block-cover__inner-container {
+    padding-top: calc(var(--topbar-height) + var(--header-bar-height) + 3rem) !important;
+  }
+
+  /*
+   * Hero « Entreprises » : une Couverture blanche interne a parfois le style calques —
+   * ne pas l’empiler comme une bannière « Déplacer » (sinon carte blanche ~60 px de large).
+   */
+  body:not(.editor-styles-wrapper) .wp-block-cover.afvf-wix-photo-card .wp-block-cover.afvf-banner-canvas,
+  body:not(.editor-styles-wrapper) .wp-block-cover.afvf-hero-entreprises .wp-block-cover.afvf-banner-canvas,
+  body:not(.editor-styles-wrapper) .wp-block-cover.afvf-wix-photo-card .wp-block-cover.is-style-afvf-banner-canvas {
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+  body:not(.editor-styles-wrapper) .wp-block-cover.afvf-wix-photo-card .wp-block-cover.afvf-banner-canvas > .wp-block-cover__inner-container,
+  body:not(.editor-styles-wrapper) .wp-block-cover.afvf-hero-entreprises .wp-block-cover.afvf-banner-canvas > .wp-block-cover__inner-container,
+  body:not(.editor-styles-wrapper) .wp-block-cover.afvf-wix-photo-card .wp-block-cover.is-style-afvf-banner-canvas > .wp-block-cover__inner-container {
+    padding: 0.65rem 0.45rem !important;
+    gap: 0 !important;
+    min-height: 0 !important;
+  }
+  body:not(.editor-styles-wrapper) .wp-block-cover.afvf-wix-photo-card .wp-block-cover.afvf-banner-canvas .afvf-wix-overlay-card,
+  body:not(.editor-styles-wrapper) .wp-block-cover.afvf-hero-entreprises .wp-block-cover.afvf-banner-canvas .afvf-wix-overlay-card {
+    width: min(100%, calc(100vw - 1.35rem)) !important;
+    max-width: min(100%, calc(100vw - 1.35rem)) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  body:not(.editor-styles-wrapper) .wp-block-cover.afvf-wix-photo-card .wp-block-cover.afvf-banner-canvas .afvf-wix-overlay-card :is(.wp-block-heading, p) {
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+  }
+
+  /* Assises — affiche + « Téléchargez le Programme » (pas le empilement générique trop étroit) */
+  body:not(.editor-styles-wrapper) .wp-block-cover.afvf-banner-assises {
+    min-height: 0 !important;
+    overflow: hidden;
+  }
+  body:not(.editor-styles-wrapper) .wp-block-cover.afvf-banner-assises > .wp-block-cover__inner-container {
+    justify-content: flex-end !important;
+    align-items: center !important;
+    gap: 0.85rem !important;
+    padding: calc(var(--header-bar-height, 58px) + 1rem) 0.65rem 1.35rem !important;
+    min-height: min(540px, 88vh) !important;
+    box-sizing: border-box;
+  }
+  body:not(.editor-styles-wrapper) .wp-block-cover.afvf-banner-assises .afvf-assises-poster {
+    order: 1;
+    position: relative !important;
+    inset: auto !important;
+    width: min(94vw, 400px) !important;
+    max-width: 94vw !important;
+    margin: 0 auto !important;
+  }
+  body:not(.editor-styles-wrapper) .wp-block-cover.afvf-banner-assises .afvf-assises-poster.is-resized,
+  body:not(.editor-styles-wrapper) .wp-block-cover.afvf-banner-assises .afvf-assises-poster img {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+  }
+  body:not(.editor-styles-wrapper) .wp-block-cover.afvf-banner-assises .afvf-assises-cta {
+    order: 2;
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 0.35rem !important;
+    text-align: center !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+  }
+  body:not(.editor-styles-wrapper) .wp-block-cover.afvf-banner-assises .afvf-drag-handle {
+    display: none !important;
+  }
+}

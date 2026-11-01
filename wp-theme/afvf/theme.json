@@ -1,0 +1,84 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"settings": {
+		"appearanceTools": true,
+		"useRootPaddingAwareAlignments": false,
+		"layout": {
+			"contentSize": "920px",
+			"wideSize": "1120px",
+			"allowCustomContentAndWideSize": true
+		},
+		"spacing": {
+			"units": [ "px", "em", "rem", "%", "vw", "vh" ]
+		},
+		"border": {
+			"radius": true,
+			"color": true,
+			"style": true,
+			"width": true
+		},
+		"dimensions": {
+			"minHeight": true,
+			"minWidth": true,
+			"width": true,
+			"height": true,
+			"aspectRatio": true
+		},
+		"color": {
+			"text": true,
+			"background": true,
+			"link": true,
+			"custom": true,
+			"defaultPalette": true,
+			"defaultGradients": false,
+			"palette": [
+				{ "slug": "afvf-pink", "color": "#ec5e87", "name": "Rose AFVF" },
+				{ "slug": "afvf-navy", "color": "#1a3d8f", "name": "Bleu AFVF" },
+				{ "slug": "afvf-dark", "color": "#222222", "name": "Noir" },
+				{ "slug": "afvf-gray", "color": "#666666", "name": "Gris" }
+			]
+		},
+		"blocks": {
+			"core/paragraph": {
+				"color": {
+					"text": true,
+					"background": true,
+					"link": true,
+					"custom": true
+				},
+				"typography": {
+					"customFontSize": true,
+					"fontSizes": true,
+					"lineHeight": true,
+					"fontWeight": true,
+					"letterSpacing": true,
+					"textTransform": true
+				}
+			},
+			"core/heading": {
+				"color": {
+					"text": true,
+					"link": true
+				}
+			},
+			"core/group": {
+				"dimensions": {
+					"minHeight": true,
+					"minWidth": true,
+					"width": true,
+					"height": true,
+					"aspectRatio": true
+				},
+				"spacing": {
+					"padding": true,
+					"margin": true,
+					"blockGap": true
+				},
+				"layout": {
+					"allowEditing": true
+				}
+			}
+		}
+	}
+}

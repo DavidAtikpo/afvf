@@ -1,0 +1,61 @@
+AFVF — Quel éditeur utiliser ?
+=============================
+
+Éditeur par défaut de WordPress = Gutenberg (blocs). Le thème AFVF est
+conçu pour lui. Vous n’êtes pas obligé d’installer Elementor.
+
+Pourquoi l’image semble « cachée » ?
+------------------------------------
+• Bloc Image seul = image + texte en dessous (pas sur l’image).
+• Bloc Couverture avec opacité 50 % = voile sombre sur toute l’image.
+• Galerie = grille d’images, pas une bannière avec carte par-dessus.
+
+Solution recommandée (sans plugin)
+----------------------------------
+1. Pages → votre page → Modifier
+2. Bouton + → Tout parcourir → onglet Compositions → catégorie AFVF
+3. Choisir :
+   • « Entreprises & Institutions — hero (maquette Wix) » pour la page
+     Entreprises (carte blanche + dégradé — même rendu admin / public)
+   • ou « Photo + carte blanche au centre (type Wix) » (générique)
+4. Ne pas utiliser « Bannière placement libre » pour ce type de hero :
+   c’est réservé aux bannières Assises (texte + affiche déplaçables).
+5. Cliquer sur la zone sombre (bloc Couverture) :
+   - Barre latérale → Image de couverture → choisir votre photo
+   - Opacité du overlay : 0 % (aucun voile)
+6. Cliquer la carte blanche (bloc Groupe, pas la Couverture) : titre, texte, boutons.
+   Largeur de la carte :
+   • Mise en page → « Largeur du contenu » (ex. 720px, 1100px), ou
+   • Styles → « Carte hero — étroite / large / personnaliser »
+     (+ Dimensions → largeur si « personnaliser »)
+7. Pour chaque bouton : lien vers vos pages (Mobiliser, Kër Aïcha, etc.)
+8. Mettre à jour
+
+Refaire à la main (3 blocs)
+---------------------------
+1. Ajouter un bloc « Couverture » (pas Image, pas Galerie)
+2. Mettre l’image de fond → Opacité overlay = 0 %
+3. À l’intérieur : bloc « Groupe » → fond blanc (Couleur arrière-plan)
+4. Dans le groupe : Titre + Paragraphe + Boutons
+
+Personnaliser → cocher « Pages construites dans l’éditeur » pour ne pas
+avoir un second hero imposé par le thème.
+
+Alternative type Wix (plugin)
+-----------------------------
+Si vous préférez glisser-déposer visuel :
+• Elementor (gratuit) — Extensions → Ajouter → Elementor
+• Compatible avec le thème AFVF (le contenu Elementor remplace la page)
+
+Elementor : section fond image + colonne + boîte blanche au centre.
+
+Diagnostic technique (éditeur vs public)
+----------------------------------------
+Voir le fichier DIAGNOSTIC-BLOCS.txt (checklist complète + causes AFVF).
+
+Motifs AFVF disponibles
+-----------------------
+• Photo + carte blanche au centre
+• Hero fond fixe (GIF)
+• Accueil — 3 colonnes
+• Page — Bandeau titre + intro

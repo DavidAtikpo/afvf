@@ -1,0 +1,13 @@
+KËR AÏCHA — 3 MOTIFS (Couverture + contenu dedans)
+====================================================
+
+Insérez dans l’ordre, un motif = un bloc Couverture :
+
+  Motif 1 — Couverture fond + galerie (3 photos + Adhérer)
+  Motif 2 — Couverture fond + carte KËR AÏCHA
+  Motif 3 — Couverture fond + barre (Nous appeler / E-mail / Je participe)
+
+Chaque motif : Couverture → Remplacer → votre image de fond (voile 0 %).
+Les photos / texte / barre sont **à l’intérieur** de la Couverture (liste de blocs).
+
+Catégorie motifs : AFVF ou Kër Aïcha.

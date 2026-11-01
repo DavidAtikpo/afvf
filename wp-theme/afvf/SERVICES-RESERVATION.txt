@@ -1,0 +1,86 @@
+AFVF — Services en ligne & réservation (équivalent Wix Book Online)
+====================================================================
+
+Sur Wix, « Book Online » = Wix Bookings (catalogue + calendrier + e-mails).
+WordPress ne propose pas cela nativement : il faut une extension de prise de rendez-vous.
+
+Architecture recommandée (2 niveaux)
+------------------------------------
+
+1. Page catalogue  — ex. /book-online/ ou /services/
+   • Liste des 3 services avec image, durée, prix, bouton « Réserver »
+   • Motif AFVF : « Services en ligne — catalogue + Réserver (3 cartes) »
+
+2. Une page par service (ou une page unique avec choix du service)
+   • Calendrier : date, créneaux, formulaire, confirmation
+   • Générée par l’extension (shortcode ou bloc Gutenberg)
+
+Les boutons « Réserver » du catalogue doivent pointer vers l’URL de réservation
+de chaque service (réglée dans l’extension).
+
+Option A — Simply Schedule Appointments (gratuit, bon pour démarrer)
+--------------------------------------------------------------------
+1. Extensions → Ajouter → « Simply Schedule Appointments » → Installer, Activer
+2. SSA → Appointment Types → créer 3 types :
+   • Rendez-vous d’information en ligne — 15 min — Gratuit
+   • Sensibilisation VSS et féminicides — 14 h — 290 € (ou sur devis)
+   • Cours « Écouter est un art » — 1 h — 35 €
+3. SSA → Settings → disponibilités, fuseau Europe/Paris
+4. Pour chaque type : copier l’URL de réservation (Booking App URL)
+5. Pages → créer « Book Online » (slug book-online) :
+   • Insérer le motif AFVF catalogue
+   • Mettre les vraies URLs sur chaque bouton Réserver
+6. Option calendrier :
+   • Soit une page par service avec le bloc « SSA Booking » / shortcode du type
+   • Soit une seule page /reserver/ avec le widget complet SSA
+
+E-mails de confirmation : installer WP Mail SMTP (voir DEPLOIEMENT.md).
+
+Option B — Amelia (payant, très proche visuel Wix)
+--------------------------------------------------
+1. Extensions → Amelia Booking
+2. Services → créer les 3 prestations (durée, prix, image)
+3. Employés / calendriers si plusieurs personnes
+4. Pages :
+   • Catalogue : shortcode [ameliacatalog] OU votre motif AFVF + liens vers
+     les pages service Amelia
+   • Réservation : [ameliabooking] ou page auto par service
+5. Personnaliser couleurs Amelia → rose #ec5e87 pour coller au thème
+
+Option C — Calendly ou Cal.com (simple, hébergé chez eux)
+---------------------------------------------------------
+1. Créer 3 types d’événements sur calendly.com ou cal.com
+2. Catalogue : motif AFVF, boutons Réserver → liens Calendly
+3. Pas de calendrier sur votre site : redirection vers leur page
+   (moins intégré que Wix, mais rapide sans plugin lourd)
+
+Option D — WooCommerce + extension réservation
+----------------------------------------------
+Si vous vendez déjà des formations payantes en ligne : WooCommerce Bookings
+ou produits « réservation » — plus lourd, utile si boutique unifiée.
+
+Mise en page catalogue (thème AFVF)
+----------------------------------
+1. Pages → Book Online (ou Services en ligne)
+2. + → Compositions → AFVF → « Services en ligne — catalogue + Réserver »
+3. Ajouter les 3 photos dans chaque bloc Image
+4. Sur chaque bouton Réserver : lien = URL de l’extension (étape 4 ci-dessus)
+5. Permaliens : Réglages → permaliens → Enregistrer après création des pages
+
+Page calendrier (exemple SSA)
+-----------------------------
+• Titre : Programmer votre service
+• Contenu : uniquement le bloc de réservation de l’extension
+• Pas besoin de recréer le calendrier à la main : le plugin affiche date/heure/Suivant
+
+Menu
+----
+Apparence → Menus → « Services en ligne » → lien vers /book-online/
+
+Checklist prod
+--------------
+[ ] Extension installée et testée (réservation test + e-mail reçu)
+[ ] 3 services créés avec durée / prix
+[ ] Catalogue avec motif AFVF + bonnes URLs Réserver
+[ ] WP Mail SMTP configuré
+[ ] Fuseau horaire : Réglages → Général → Paris

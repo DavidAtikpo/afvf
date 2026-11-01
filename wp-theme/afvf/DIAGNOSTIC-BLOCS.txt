@@ -1,0 +1,107 @@
+AFVF — Diagnostic éditeur / site public (checklist)
+=====================================================
+
+Date de revue : thème 1.9.32 — wp-theme/afvf/
+
+1. wp_dequeue_style (block-library, global-styles)
+--------------------------------------------------
+Statut : OK — aucune occurrence dans le thème.
+
+   wp_dequeue_style( 'wp-block-library' );
+   wp_dequeue_style( 'wp-block-library-theme' );
+   wp_dequeue_style( 'global-styles' );
+
+→ Ne pas ajouter ces lignes « pour alléger » : elles cassent colonnes,
+  boutons, groupes et alignements.
+
+2. Support des blocs (after_setup_theme)
+----------------------------------------
+Statut : OK (complété en 1.9.32)
+
+Fichier : inc/setup.php → fonction afvf_setup()
+
+   add_theme_support( 'wp-block-styles' );   ← ajouté 1.9.32
+   add_theme_support( 'align-wide' );
+   add_theme_support( 'responsive-embeds' );
+   add_theme_support( 'editor-styles' );
+
+Éditeur : add_editor_style() charge main.css + editor-hero-card.css +
+banner-canvas.css (pas style.css seul — volontaire, le vrai CSS est main.css).
+
+3. Templates et the_content()
+-----------------------------
+Statut : OK
+
+   page.php, front-page.php, index.php, single.php → the_content()
+   Pas de the_excerpt() à la place du corps de page.
+
+Mode « Pages construites dans l’éditeur » (Personnaliser) :
+   conteneur = section.afvf-block-content (pleine largeur, padding 0)
+   au lieu de section.wrap.prose (max-width 1120px).
+
+4. Largeurs contenu (theme.json vs CSS)
+---------------------------------------
+Statut : aligné en 1.9.32
+
+   theme.json     contentSize 920px  (carte hero, groupes constrained)
+                  wideSize    1120px  (= --max dans main.css)
+   afvf_content_width()        1120  (inc/setup.php)
+   .wrap                         max-width: var(--max) → 1120px
+
+Les blocs « large » / pleine largeur (alignwide, alignfull) :
+   .afvf-block-content > .alignfull { width 100%; max-width none; }
+
+5. Reset CSS / conflits style.css
+---------------------------------
+Statut : OK pour style.css racine (en-tête thème uniquement, pas de reset).
+
+Attention : assets/css/main.css
+   • * { box-sizing: border-box; } — normal
+   • body margin 0, img max-width 100% — normal
+   • Pas de reset agressif sur .wp-block-columns / .wp-block-button global
+   • Surcharges ciblées AFVF : hero Wix, footer social, afvf-wix-overlay-card
+
+Test rapide : désactiver temporairement afvf-main dans l’inspecteur → si les
+blocs WP natifs réapparaissent correctement, le conflit vient d’une règle
+AFVF (souvent bannière ou hero sous header).
+
+6. Causes AFVF spécifiques (éditeur ≠ public) — LIRE EN PRIORITÉ
+----------------------------------------------------------------
+
+A) Même Couverture avec DEUX modes incompatibles
+   Classes observées sur Entreprises (bug) :
+     afvf-wix-photo-card + afvf-hero-entreprises
+     + afvf-banner-canvas + is-style-afvf-banner-canvas
+
+   Effet : banner-canvas.css (chargé APRÈS main.css) force inner-container
+   en position absolute, padding 0, alignement haut-gauche → titre coupé,
+   carte à gauche.
+
+   Correctif thème 1.9.31+ :
+     • CSS : hero photo+carte ignore le mode calques
+     • JS : ne plus ajouter banner-canvas sur afvf-wix-photo-card
+     • PHP : retrait des classes calques au rendu public
+
+   Action éditeur : motif « Entreprises & Institutions — hero (maquette Wix) »
+   ; style Couverture ≠ « Bannière — placement libre ».
+
+B) Hero remonté sous le menu (body.afvf-hero-under-header)
+   margin-top négatif sur le premier .wp-block-cover — voulu pour l’accueil.
+   Les heroes « carte blanche » ont un padding-top dédié (main.css +
+   banner-canvas.css fin de fichier). Les bannières calques Assises ont
+   margin-top: 0 pour ne pas couper les calques en %.
+
+C) Ordre de chargement CSS public (1.9.32)
+   afvf-main dépend de wp-block-library et global-styles → les styles
+   du thème s’appliquent après les blocs WordPress (cascade prévisible).
+
+D) Méta afvf_banner_layers
+   Si des positions ont été enregistrées pour une mauvaise page, vérifier
+   en base ou réinsérer le motif Entreprises propre.
+
+Checklist avant mise en prod
+----------------------------
+[ ] Personnaliser : « Pages construites dans l’éditeur » coché si besoin
+[ ] Page Entreprises : motif hero Wix, pas bannière placement libre
+[ ] Ctrl+F5 sur la page ; Couverture sans afvf-banner-canvas (code source)
+[ ] Thème ≥ 1.9.32 téléversé ou export/theme-afvf.zip regénéré
